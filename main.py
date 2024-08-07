@@ -1,3 +1,5 @@
+import json
+
 """
 stock - наличие товара суммарно в магазине на складе
 addresses - список адресов в торговом зале, на которых размещены определенные артикулы с заданной вместимостью
@@ -21,7 +23,14 @@ article_database - список артикулов с названиями
 addresses = {'1-1L': {'10073940': 40}, '1-1R': {'10072745': 52}, '1-2L': {'10073940': 30}, '1-2R': {'10072630': 68}, '1-3L': {'15163427': 56}, '1-3R': {},
              '1-4L': {}, '1-4R': {}, '1-5L': {'10072745': 52}, '1-5R': {'15163427': 56}, '2-1L': {'10073940': 40}, '2-1R': {}, '2-2L': {'10073940': 40}, '2-2R': {},
              '2-3L': {}, '2-3R': {'10072745': 52}, '2-4L': {}, '2-4R': {}, '2-5L': {}, '2-5R': {}}
+def save_json(my_dict, saving_dict):
+    with open(my_dict, 'w', encoding="utf-8") as f:
+        json.dump(saving_dict, f)
 
+def load_json(my_dict):
+    with open(my_dict, 'r', encoding='utf-8') as f:
+        json_file = json.load(f)
+        return json_file
 
 def add():
     print(addresses)
@@ -152,3 +161,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    load_json()
+    save_json()
