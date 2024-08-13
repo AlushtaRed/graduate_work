@@ -14,4 +14,30 @@ stock = {'10073940':440, '10072745':520,
              '15163427':560,'18478820':240,
             '10072681':520,'10072630':340,
             '12757510':420, '12756884':148}
-
+print(addresses)
+def unaccounted_goods():
+    unaccounted_goods = {}
+    for id,quantity in stock.items():
+        find_id = id
+        sum_id = 0
+        for address, item in addresses.items():
+            if find_id in item.keys():
+                sum_id += item[find_id]
+        if (stock.setdefault(id,0)-warehouse.setdefault(id,0)-int(sum_id))>0:
+            # unaccounted_goods[id] = (stock.get(id) - warehouse.get(id) - int(sum_id))
+            unaccounted_goods[id] = sum_id - (stock.get(id) - warehouse.get(id))
+    print(unaccounted_goods)
+    
+def replenishment():
+    fullness = int(input('Введите процент наполнености: '))
+    replenishment_goods = {}
+    for id, quantity in stock.items():
+        find_id = id
+        sum_id = 0
+        for address, item in addresses.items():
+            if find_id in item.keys():
+                sum_id += item[find_id]
+        if (stock.setdefault(id,0) - warehouse.setdefault(id,0)) < sum_id*(fullness/100):
+            replenishment_goods[id] = sum_id - (stock.get(id) - warehouse.get(id))
+    print(replenishment_goods)
+replenishment()
