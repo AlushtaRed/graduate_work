@@ -26,7 +26,7 @@ addresses = {'1-1L': {'10073940': 40}, '1-1R': {'10072745': 52}, '1-2L': {'10073
 
 def save_json(my_dict, saving_dict):
     with open(my_dict, 'w', encoding="utf-8") as f:
-        json.dump(saving_dict, f)
+        json.dump(saving_dict, f, ensure_ascii=False)
 
 def load_json(my_dict):
     with open(my_dict, 'r', encoding='utf-8') as f:
@@ -162,5 +162,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    load_json()
-    save_json()
+    # load_json()
+    # save_json()

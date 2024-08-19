@@ -1,10 +1,26 @@
 import json
-
+from print import print_report
 from main import load_json,save_json
 
 # article_database = {'10073940':'Штукатурка Ротбанд 30 кг', '10072745':'ГСП 12,5 мм влаг.','15163427':'Пескобетон Axton 30 кг','18478820':'Пескобетон 40 кг',
 # '10072681':'ГСП 12,5 мм стандарт','10072630':'ГСП 9,5 мм влаг.', '12757510':'Грунтовка Ceresit 10/17', '12756884':'Грунтовка Кнауф 10 л'}
-
+def find_article_v2():
+    find_id = input('Введите артикул: ')
+    article_database = load_json('article_database.json')
+    warehouse = load_json('warehouse.json')
+    addresses = load_json('addresses.json')
+    stock = load_json('stock.json')
+    id_adr = {}
+    adr =[]
+    if article_database.get(find_id):
+        for adres,items in addresses.items():
+            if find_id in items.keys():
+                adr.append(adres)
+        id_adr[find_id]=adr
+      
+    else:
+        print(f'Артикул {find_id} не найден')
+    print_report(id_adr,'Адреса')
 
 def find_article():
     find_id = input('Введите артикул: ')
@@ -51,8 +67,8 @@ def add_to_adrdress(id):
     print(addresses)
     save_json('addresses.json', addresses)
     
-# find_article()
-add_to_adrdress('10072745')
+find_article_v2()
+# add_to_adrdress('10072745')
 # save_article_database(article_database)
 # article_database = load_article_database()
 # print(article_database)

@@ -41,7 +41,6 @@ def unaccounted_goods():
             if find_id in item.keys():
                 sum_id += item[find_id]
         if (stock.setdefault(id,0)-warehouse.setdefault(id,0)-int(sum_id))>0:
-            # unaccounted_goods[id] = (stock.get(id) - warehouse.get(id) - int(sum_id))
             unaccounted_goods[id] = abs(sum_id - (stock.get(id) - warehouse.get(id)))
     # print(unaccounted_goods)
     print_report(unaccounted_goods, 'Неучтенный товар')
